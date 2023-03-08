@@ -5,7 +5,7 @@ export async function checkout ({lineItems}){
 
     const getStripe = () => {
         if(!stripePromise){
-            stripePromise = loadStripe ("pk_test_51MeNjlBnUuL4pMAm5CZ3xP8IqqdGPCYCLRSip0MHwmMXVvHKLqmQsGTnaZabS2EYtQeB27TUKiqAkx1q4RFgpPXL0028NJAQiy")
+            stripePromise = loadStripe (process.env.NEXT_STRIPE_PUBLISHABLE_KEY)
         }
         return stripePromise
     }
@@ -16,6 +16,6 @@ export async function checkout ({lineItems}){
         mode:'payment',
         lineItems,
         successUrl: `${window.location.origin}?session_id={CHECKOUT_SESSION_ID}`,
-        cancelUrl: window.location.origin        
+        cancelUrl: window.location.origin
     })
 }
